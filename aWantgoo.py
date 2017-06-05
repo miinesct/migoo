@@ -60,6 +60,7 @@ for case in switch(Status):
                 if len(s.strip(my_string)) == 4:
                     l1.append((s.strip(my_string)))
         break
-l2 = {}.fromkeys(l1).keys()
+l2 = sorted(set(l1),key=l1.index)
+#l2 = {}.fromkeys(l1).keys()
 for i in range(len(l2)):
     print l2[i]
