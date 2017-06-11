@@ -1,14 +1,16 @@
 #coding=utf-8
-import requests
-from bs4 import BeautifulSoup
+#import requests
+#from bs4 import BeautifulSoup
 import json
-import re
+#import re
 import os  
 import sys
 from random import randint  
 import jieba
 
-filename='C:\\Users\\Leo\\migoo\\Lyrics generator\\lyic.txt'
+filename='/storage/sdcard0/qpython/scripts/lyic1.txt'
+wordsname='/storage/sdcard0/qpython/scripts/words1.txt'
+words='words1.txt'
 '''
 #分詞遇到error時使用
 if sys.getdefaultencoding() != 'utf-8':  
@@ -20,7 +22,7 @@ def cut_words(filename):
         content = f.read()
         seg_list = jieba.cut(content, cut_all=False)
         word_list = [str(x) for x in seg_list if x not in ['', ' ']]
-        with open('words.txt', 'w') as wf:
+        with open(words, 'w') as wf:
             wf.write(' / '.join(word_list))
     return None
 
@@ -46,9 +48,9 @@ def get_random_word(sub_word_dict):
     return sub_word_dict.keys()[index]
 
 if __name__ == "__main__":
-    if not os.path.exists('words.txt'):
+    if not os.path.exists(words):
         cut_words(filename)
-    word_list = get_word_list('C:\\Users\\Leo\\migoo\\Lyrics generator\\words.txt')
+    word_list = get_word_list(wordsname)
     word_dict = build_word_dict(word_list)
     length = 30
     chain = ""
