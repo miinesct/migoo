@@ -7,8 +7,11 @@
 過濾出今日"偏多"的股票
 
 程式相依套件
+
 pip install -U selenium
+
 pip install requests
+
 pip install BeautifulSoup4
 
 下載Firefox最新版本+geckodriver
