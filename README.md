@@ -1,19 +1,22 @@
 # migoo
-�ϥ�Python 2.7
+使用Python 2.7
 
-# �b�۰ʤƧ�X����½�h���Ѳ�
+# 半自動化找出當日翻多的股票
 
-�{���̮ۨM��
+使用玩股網wantgoo的十全戰法進行判斷
+過濾出今日"偏多"的股票
+
+程式相依套件
 pip install -U selenium
 pip install requests
 pip install BeautifulSoup4
 
-�U��Firefox�̷s����+geckodriver
+下載Firefox最新版本+geckodriver
 https://github.com/mozilla/geckodriver/releases
-�����Y��exe��m�b�����ܼƤU
+解壓縮的exe放置在環境變數下
 
-�ϥ�Wantgoo.py�C�L�X����½�h���Ѳ��A�N���G�ƻs�K�W��stock.txt��
+使用Wantgoo.py列印出當日翻多的股票，將結果複製貼上到stock.txt內
 
-�A�ϥ�OpenWantGoo.py�Ӷ}��stock.txt�����Ѳ����X
+再使用OpenWantGoo.py來開啟stock.txt內的股票號碼
 
-�|�۰ʱư�����q�C��500�i���Ѳ����X�A�A�̾ڸg��D�X�Ѳ�
+會自動排除成交量低於500張的股票號碼，再依據經驗挑出股票
