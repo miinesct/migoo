@@ -28,11 +28,21 @@ class switch(object):  #Switch處理
         """Indicate whether or not to enter a case suite"""
         if self.fall or not args:
             return True
-        elif self.value in args: # changed for v1.5, see below
+        elif self.value in args: 
             self.fall = True
             return True
         else:
             return False
+
+def WriteFile():
+    address=u'.\\stock.txt'   #股票txt檔案位置
+    fp=open(address,'w+')
+    fp.seek(0)
+    for i in range(len(number)):
+        fp.write(number[i]+'\n')
+    fp.close()
+
+number=[]
 
 for case in switch(Status):
     if case('1'): #看多"走勢數量(十全戰法+ 六脈神劍)=  1   
@@ -40,82 +50,92 @@ for case in switch(Status):
         res1 = requests.get(r'http://stockwinner.sohowgood.com/SixContext.aspx')
         soup = bs(res.text,"html.parser")
         soup1 = bs(res1.text,"html.parser")
-        my_string = "/TwStock/Stock.aspx?sno="
+        href_link = "/TwStock/Stock.aspx?sno="
         for lind in soup.find_all('a'):
-            if  my_string in lind['href']:
+            if  href_link in lind['href']:
                 s =  lind['href']
-                if len(s.strip(my_string)) == 4:
-                    print s.strip(my_string)
+                if len(s.strip(href_link)) == 4:
+                    number.append(s.strip(href_link))
+                    #print s.strip(href_link)
         for lind1 in soup1.find_all('a'):
-            if  my_string in lind1['href']:
+            if  href_link in lind1['href']:
                 s =  lind1['href']
-                if len(s.strip(my_string)) == 4:
-                    print s.strip(my_string)
+                if len(s.strip(href_link)) == 4:
+                    number.append(s.strip(href_link))
+                    #print s.strip(href_link)
+        WriteFile()
         break
     if case('2'): #看空"走勢數量(十全戰法+ 六脈神劍)=  2
         res = requests.get(r'http://stockwinner.sohowgood.com/TenChart2.aspx')
         res1 = requests.get(r'http://stockwinner.sohowgood.com/SixContext2.aspx')
         soup = bs(res.text,"html.parser")
         soup1 = bs(res1.text,"html.parser")
-        my_string = "/TwStock/Stock.aspx?sno="
+        href_link = "/TwStock/Stock.aspx?sno="
         for lind in soup.find_all('a'):
-            if  my_string in lind['href']:
+            if  href_link in lind['href']:
                 s =  lind['href']
-                if len(s.strip(my_string)) == 4:
-                    print (s.strip(my_string))
+                if len(s.strip(href_link)) == 4:
+                    number.append(s.strip(href_link))
         for lind1 in soup1.find_all('a'):
-            if  my_string in lind1['href']:
+            if  href_link in lind1['href']:
                 s =  lind1['href']
-                if len(s.strip(my_string)) == 4:
-                    print (s.strip(my_string))
+                if len(s.strip(href_link)) == 4:
+                    number.append(s.strip(href_link))
+        WriteFile()
         break
     if case('3'): #技術面(爆量長紅+ 成交量排行)= 3
         res = requests.get(r'http://www.sohowgood.com/TwStock/Volume.aspx')
         soup = bs(res.text,"html.parser")
-        my_string = "/TwStock/Stock.aspx?stockno="
+        href_link = "/TwStock/Stock.aspx?stockno="
         for lind in soup.find_all('a'):
-            if  my_string in lind['href']:
+            if  href_link in lind['href']:
                 s =  lind['href']
-                if len(s.strip(my_string)) == 4:
-                    print s.strip(my_string)
+                if len(s.strip(href_link)) == 4:
+                    number.append(s.strip(href_link))
+        WriteFile()
         break
     if case('4'):
         res = requests.get(r'http://www.sohowgood.com/TwStock/RankUp.aspx')
         soup = bs(res.text,"html.parser")
-        my_string = "/TwStock/Stock.aspx?stockno="
+        href_link = "/TwStock/Stock.aspx?stockno="
         for lind in soup.find_all('a'):
-            if  my_string in lind['href']:
+            if  href_link in lind['href']:
                 s =  lind['href']
-                if len(s.strip(my_string)) == 4:
-                    print s.strip(my_string)
+                if len(s.strip(href_link)) == 4:
+                    number.append(s.strip(href_link))
+        WriteFile()
         break
     if case('5'): #技術面(MACD弱轉強(金叉)+ MACD強轉弱(死叉))= 5
         res = requests.get(r'http://www.sohowgood.com/TwStock/MACD.aspx')
         soup = bs(res.text,"html.parser")
-        my_string = "/TwStock/Stock.aspx?stockno="
+        href_link = "/TwStock/Stock.aspx?stockno="
         for lind in soup.find_all('a'):
-            if  my_string in lind['href']:
+            if  href_link in lind['href']:
                 s =  lind['href']
-                if len(s.strip(my_string)) == 4:
-                    print (s.strip(my_string))
+                if len(s.strip(href_link)) == 4:
+                    number.append(s.strip(href_link))
+        WriteFile()
         break
     if case('6'): #籌碼面(融資連3d增+ 資減+ 融卷連3d增+ 卷減)= 6
         res = requests.get(r'http://www.sohowgood.com/TwStock/Margin.aspx')
         soup = bs(res.text,"html.parser")
-        my_string = "/TwStock/Stock.aspx?stockno="
+        href_link = "/TwStock/Stock.aspx?stockno="
         for lind in soup.find_all('a'):
-            if  my_string in lind['href']:
+            if  href_link in lind['href']:
                 s =  lind['href']
-                if len(s.strip(my_string)) == 4:
-                    print (s.strip(my_string))
+                if len(s.strip(href_link)) == 4:
+                    number.append(s.strip(href_link))
+        WriteFile()
         break            
     if case('7'): #籌碼面(外資4+ 投信2+ 自營2+ 三大法2+ 外資2+ 投信2 +自營2)= 7
         res = requests.get(r'http://www.sohowgood.com/TwStock/ThreeLegal.aspx')
         soup = bs(res.text,"html.parser")
-        my_string = "/TwStock/Stock.aspx?stockno="
+        href_link = "/TwStock/Stock.aspx?stockno="
         for lind in soup.find_all('a'):
-            if  my_string in lind['href']:
+            if  href_link in lind['href']:
                 s =  lind['href']
-                if len(s.strip(my_string)) == 4:
-                    print (s.strip(my_string))
+                if len(s.strip(href_link)) == 4:
+                    number.append(s.strip(href_link))
+        WriteFile()
         break
+
